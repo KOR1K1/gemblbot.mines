@@ -21,7 +21,7 @@
             align-items: center;
             flex-direction: column;
             overflow: hidden;
-            background-image: url("./index_files/bg.jpg");
+            /* background-image: url("./index_files/bg.jpg"); */
             font-family: 'Arial', sans-serif;
         }
 
@@ -163,6 +163,7 @@ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Мягкая тень */
                 width: 80vw;
                 max-width: 600px;
                 font-family: 'Intro';
+                display: block;
             }
 
             #explodeButton:hover, #closeButton:hover {
@@ -331,6 +332,7 @@ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Мягкая тень */
                 width: 70vw;
                 max-width: 300px;
                 font-family: 'Intro';
+                display: block;
             }
 
             #explodeButton:hover, #closeButton:hover {
@@ -491,6 +493,41 @@ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Мягкая тень */
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку при нажатии на любом элементе */
             -webkit-touch-callout: none; /* Отключает вызов меню на долгий тап */
         }
+
+        .video-container {
+    position: absolute;
+    width: 100%;
+    height: 100vh; /* Высота на весь экран */
+    overflow: hidden;
+}
+
+video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Видео заполняет фон */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Затемнение (0.5 — полупрозрачность) */
+}
+
+.content {
+    position: relative;
+    color: white;
+    text-align: center;
+    z-index: 2;
+}
+
+
     </style>
 <style type="text/css">.vue-slider-dot{position:absolute;-webkit-transition:all 0s;transition:all 0s;z-index:5}.vue-slider-dot:focus{outline:none}.vue-slider-dot-tooltip{position:absolute;visibility:hidden}.vue-slider-dot-hover:hover .vue-slider-dot-tooltip,.vue-slider-dot-tooltip-show{visibility:visible}.vue-slider-dot-tooltip-top{top:-10px;left:50%;-webkit-transform:translate(-50%,-100%);transform:translate(-50%,-100%)}.vue-slider-dot-tooltip-bottom{bottom:-10px;left:50%;-webkit-transform:translate(-50%,100%);transform:translate(-50%,100%)}.vue-slider-dot-tooltip-left{left:-10px;top:50%;-webkit-transform:translate(-100%,-50%);transform:translate(-100%,-50%)}.vue-slider-dot-tooltip-right{right:-10px;top:50%;-webkit-transform:translate(100%,-50%);transform:translate(100%,-50%)}</style><style type="text/css">.vue-slider-marks{position:relative;width:100%;height:100%}.vue-slider-mark{position:absolute;z-index:1}.vue-slider-ltr .vue-slider-mark,.vue-slider-rtl .vue-slider-mark{width:0;height:100%;top:50%}.vue-slider-ltr .vue-slider-mark-step,.vue-slider-rtl .vue-slider-mark-step{top:0}.vue-slider-ltr .vue-slider-mark-label,.vue-slider-rtl .vue-slider-mark-label{top:100%;margin-top:10px}.vue-slider-ltr .vue-slider-mark{-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.vue-slider-ltr .vue-slider-mark-step{left:0}.vue-slider-ltr .vue-slider-mark-label{left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}.vue-slider-rtl .vue-slider-mark{-webkit-transform:translate(50%,-50%);transform:translate(50%,-50%)}.vue-slider-rtl .vue-slider-mark-step{right:0}.vue-slider-rtl .vue-slider-mark-label{right:50%;-webkit-transform:translateX(50%);transform:translateX(50%)}.vue-slider-btt .vue-slider-mark,.vue-slider-ttb .vue-slider-mark{width:100%;height:0;left:50%}.vue-slider-btt .vue-slider-mark-step,.vue-slider-ttb .vue-slider-mark-step{left:0}.vue-slider-btt .vue-slider-mark-label,.vue-slider-ttb .vue-slider-mark-label{left:100%;margin-left:10px}.vue-slider-btt .vue-slider-mark{-webkit-transform:translate(-50%,50%);transform:translate(-50%,50%)}.vue-slider-btt .vue-slider-mark-step{top:0}.vue-slider-btt .vue-slider-mark-label{top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.vue-slider-ttb .vue-slider-mark{-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.vue-slider-ttb .vue-slider-mark-step{bottom:0}.vue-slider-ttb .vue-slider-mark-label{bottom:50%;-webkit-transform:translateY(50%);transform:translateY(50%)}.vue-slider-mark-label,.vue-slider-mark-step{position:absolute}</style><style type="text/css">.vue-slider{position:relative;-webkit-box-sizing:content-box;box-sizing:content-box;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;display:block;-webkit-tap-highlight-color:rgba(0,0,0,0)}.vue-slider-rail{position:relative;width:100%;height:100%;-webkit-transition-property:width,height,left,right,top,bottom;transition-property:width,height,left,right,top,bottom}.vue-slider-process{position:absolute;z-index:1}</style><style>@import url("chrome-extension://adlpodnneegcnbophopdmhedicjbcgco/content/styles.css");</style></head>
 <body>
@@ -508,8 +545,8 @@ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Мягкая тень */
         <button class="trap-btn" id="trap-plus">+</button>
     </div>
 
-    <div style="text-align:center;">
-        <button id="explodeButton">Получить сигнал</button>
+    <div style="text-align: center; display: flex; flex-direction: column; gap: 10px;">
+        <a id="explodeButton">Получить сигнал</a><a href="https://t.me/skyjetteam" target="_blank" style="text-decoration: none;" id="explodeButton">Наш канал</a><a href="https://t.me/skyjet_support" target="_blank" style="text-decoration: none;" id="explodeButton">Поддержка</a>
     </div>
     <script src="./index_files/telegram-web-app.js"></script>
     <script>
@@ -742,4 +779,11 @@ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Мягкая тень */
     @import url("chrome-extension://adlpodnneegcnbophopdmhedicjbcgco/content/styles.css");
     @import url("chrome-extension://adlpodnneegcnbophopdmhedicjbcgco/caa/styles.css");
     </style>
-    <div id="troywell-caa" data-v-app=""><div class="content-app" data-v-9eaabcdc=""><!----></div></div></template></div></body></html>
+    <div id="troywell-caa" data-v-app=""><div class="content-app" data-v-9eaabcdc=""><!----></div></div></template></div>
+    <div class="video-container" style="z-index: -100;">
+        <video autoplay loop muted playsinline>
+            <source src="./index_files/bg.webm" type="video/webm">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <div class="overlay"></div>
+</body></html>
